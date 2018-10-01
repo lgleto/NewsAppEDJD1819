@@ -1,8 +1,10 @@
 package ipca.edjd.fakenews;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,21 +68,13 @@ public class MainActivity extends AppCompatActivity {
         newsList.add(n3);newsList.add(n3);
 
 
-
-
-
-
-
         listView = findViewById(R.id.listViewNews);
         adapter = new NewListAdapter();
         listView.setAdapter(adapter);
 
-
-
-
     }
 
-    class NewListAdapter extends BaseAdapter {
+    class NewListAdapter extends BaseAdapter implements View.OnClickListener{
 
         LayoutInflater layoutInflater;
 
@@ -117,7 +111,23 @@ public class MainActivity extends AppCompatActivity {
             textViewTitle.setText(newsList.get(i).getTitle());
             textViewDescription.setText(newsList.get(i).getDescription());
 
+            view.setTag(new Integer(i));
+            view.setClickable(true);
+            view.setOnClickListener(this);
+
             return view;
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            int position = (int)view.getTag();
+            Log.d("fakenews", "Position:"+position);
+
+            Intent intent = new Intent(MainActivity.this, NewsDetailActivity.class);
+            intent.putExtra("news_title",newsList.get(position).getTitle());
+            startActivity(intent);
+
         }
     }
 }
