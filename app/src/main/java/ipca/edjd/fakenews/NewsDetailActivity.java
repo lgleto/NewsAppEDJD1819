@@ -10,7 +10,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
         Bundle bundle = getIntent().getExtras();
-        String title = (String) bundle.get("news_title");
+        String title = (String) bundle.get("news_title"); // model
         setTitle(title);
     }
 }
