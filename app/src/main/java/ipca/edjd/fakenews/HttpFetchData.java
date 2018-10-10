@@ -1,7 +1,6 @@
 package ipca.edjd.fakenews;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -63,7 +62,7 @@ public class HttpFetchData extends AsyncTask<String,Void,String>{
 
             result = stringBuilder.toString();
 
-            Log.d("fakenews", result);
+            //Log.d("fakenews", result);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

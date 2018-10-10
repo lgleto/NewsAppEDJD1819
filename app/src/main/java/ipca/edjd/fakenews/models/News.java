@@ -1,5 +1,8 @@
 package ipca.edjd.fakenews.models;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 
 public class News {
@@ -86,6 +89,35 @@ public class News {
         this.content = content;
         this.urlToImage = urlToImage;
         this.categoryId = categoryId;
+    }
+
+    public News (){
+        this.author      = "";
+        this.title       = "";
+        this.description = "";
+        this.url         = "";
+        this.publishedAt = new Date();
+        this.content     = "";
+        this.urlToImage  = "";
+        this.categoryId  = 0;
+    }
+
+    public static News getNewsFromJson (JSONObject jsonObject){
+
+        News newsItem = new News();
+        try {
+            newsItem.author         = jsonObject.getString("author");
+            newsItem.title          = jsonObject.getString("title");
+            newsItem.description    = jsonObject.getString("description");
+            newsItem.url            = jsonObject.getString("url");
+            //newsItem.publishedAt  = ;
+            newsItem.content        = jsonObject.getString("content");
+            newsItem.urlToImage     = jsonObject.getString("urlToImage");
+            //newsItem.categoryId   = ;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return newsItem;
     }
 
 

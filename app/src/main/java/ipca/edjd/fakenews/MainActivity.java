@@ -13,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +44,20 @@ public class MainActivity extends AppCompatActivity {
         httpFetchData.onHttpResponseEvent(new HttpFetchData.HttpListener() {
             @Override
             public void onHttpResponseEvent(String res) {
-                Log.d("fakenews", res);
+                //Log.d("fakenews", res);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(res);
+                    JSONArray jsonArrayNews = jsonObject.getJSONArray("articles");
+                    for (int i = 0; i<jsonArrayNews.length(); i++){
+                          //Log.d("fakenews", jsonArrayNews.get(i).toString());
+                          News item=News.getNewsFromJson((JSONObject)jsonArrayNews.get(i));
+                          newsList.add(item);
+                    }
+                    adapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
