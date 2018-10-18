@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
             Intent intent = new Intent(MainActivity.this, NewsDetailActivity.class);
             intent.putExtra("news_title",newsList.get(position).getTitle());
+            intent.putExtra("news_url",newsList.get(position).getUrl());
             startActivity(intent);
 
         }
